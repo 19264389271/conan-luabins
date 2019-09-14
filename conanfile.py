@@ -1,5 +1,6 @@
 from conans import ConanFile, CMake, tools
 import os
+from shutil import copy
 
 
 class LuabinsConan(ConanFile):
@@ -42,19 +43,19 @@ class LuabinsConan(ConanFile):
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
 
-    def _configure_cmake(self):
+    def build(self):
+        copy("conanbuildinfo.cmake", os.path.join(self._source_subfolder, "conanbuildinfo.cmake"))
+        copy("CMakeLists.txt", os.path.join(self._source_subfolder, "CMakeLists.txt"))
         cmake = CMake(self)
         cmake.definitions["BUILD_TESTS"] = False  # example
-        cmake.configure(build_folder=self._build_subfolder)
-        return cmake
-
-    def build(self):
-        cmake = self._configure_cmake()
+        cmake.configure(build_folder=self._build_subfolder,source_folder = self._source_subfolder)
         cmake.build()
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src=self._source_subfolder)
-        cmake = self._configure_cmake()
+        cmake = CMake(self)
+        cmake.definitions["BUILD_TESTS"] = False  # example
+        cmake.configure(build_folder=self._build_subfolder,source_folder = self._source_subfolder)
         cmake.install()
         # If the CMakeLists.txt has a proper install method, the steps below may be redundant
         # If so, you can just remove the lines below
