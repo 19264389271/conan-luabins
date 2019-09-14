@@ -39,7 +39,7 @@ class LuabinsConan(ConanFile):
 
     def source(self):
         source_url = "https://github.com/agladysh/luabins"
-        tools.get("{0}/archive/v{1}.tar.gz".format(source_url, self.version), sha256="701F68B988FCD1B5CB874DFEFC6DF84830F6F2B801339C273395AB3AD9DE79CB")
+        tools.get("{0}/archive/v{1}.tar.gz".format(source_url, self.version), sha256="701f68b988fcd1b5cb874dfefc6df84830f6f2b801339c273395ab3ad9de79cb")
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
 

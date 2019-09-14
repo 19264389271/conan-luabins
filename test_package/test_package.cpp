@@ -1,7 +1,7 @@
-#include <iostream>
+extern "C" void test_api();
 
 int main()
 {
-    std::cout << "Bincrafters\n";
+    test_api();
     return 0;
 }
