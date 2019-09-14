@@ -47,14 +47,12 @@ class LuabinsConan(ConanFile):
         copy("conanbuildinfo.cmake", os.path.join(self._source_subfolder, "conanbuildinfo.cmake"))
         copy("CMakeLists.txt", os.path.join(self._source_subfolder, "CMakeLists.txt"))
         cmake = CMake(self)
-        cmake.definitions["BUILD_TESTS"] = False  # example
         cmake.configure(build_folder=self._build_subfolder,source_folder = self._source_subfolder)
         cmake.build()
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src=self._source_subfolder)
         cmake = CMake(self)
-        cmake.definitions["BUILD_TESTS"] = False  # example
         cmake.configure(build_folder=self._build_subfolder,source_folder = self._source_subfolder)
         cmake.install()
         # If the CMakeLists.txt has a proper install method, the steps below may be redundant
