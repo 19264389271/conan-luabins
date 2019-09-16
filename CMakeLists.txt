@@ -21,7 +21,7 @@ set(LUABINS_BASIC_SOURCES
 add_compile_definitions(LUAI_BITSINT=32)
 
 add_library(luabins ${LUABINS_BASIC_SOURCES})
-target_link_libraries(luabins ${CONAN_LIB})
+target_link_libraries(luabins ${CONAN_LIBS})
 
 set_target_properties(luabins PROPERTIES PUBLIC_HEADER "src/luabins.h")
 install(TARGETS luabins
